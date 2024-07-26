@@ -1,0 +1,24 @@
+Simple Neural Network coded by myself on 25-7-2024
+
+import numpy as np
+
+class Perceptron:
+    def __init__(self,w,b,lr,epochs):
+        self.w=w
+        self.b=b
+        self.lr=lr
+        self.epochs=epochs
+        
+    def fit(self,x,y):
+        for epoch in range(self.epochs):
+            for i in range(len(x)):
+                yhat=self.w*x[i]+self.b
+                E=(yhat-y)**2
+                dEw=2*x[i]*((self.w*x[i]+self.b)-y[i])
+                dEb=2*((self.w*x[i]+self.b)-y[i])
+                self.w=self.w-(self.lr*dEw)
+                self.b=self.b-(self.lr*dEb)
+            print(self.w,self.b,sep='<->')
+    
+    def predict(self,x):
+        return self.w*x+self.b
